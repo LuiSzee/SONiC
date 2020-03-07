@@ -24,14 +24,14 @@ test
 # About this Manual
 This document provides general information about the SONiC Platform Development Environment (PDE).  The SONiC PDE is part of the SONiC Platform Development Kit (PDK) which optimizes platform development.  The SONiC PDK consists of:
 
--PDDF (Platform Driver Development Framework): For optimized data-driven platform driver and SONiC plugin development. The PDDF details are covered in a separate document. PDDF：优化平台驱动和SONiC插件的开发
+-PDDF (Platform Driver Development Framework): For optimized data-driven platform driver and SONiC plugin development. The PDDF details are covered in a separate document.  PDDF：优化平台驱动和SONiC插件的开发
 
 -PDE  (Platform Development Environment): For optimized build and testing of platform and SAI code.  PDE：优化平台和sai代码的构建和测试
 
-The SONiC PDE is generated from the SONiC "sonic-buildimage" repository and is intended to provide ODM and external customers with a means to quickly add, compile and test their platform drivers and static device data required for a fully functional SONiC distribution. SONiC PDE由sonic-buildimage生成， 目的是提供一个快速添加、编译、测试平台驱动和全功能SONiC发行版所需的静态设备数据的方法
+The SONiC PDE is generated from the SONiC "sonic-buildimage" repository and is intended to provide ODM and external customers with a means to quickly add, compile and test their platform drivers and static device data required for a fully functional SONiC distribution.  SONiC PDE由sonic-buildimage生成， 目的是提供一个快速添加、编译、测试平台驱动和全功能SONiC发行版所需的静态设备数据的方法
 
 # Scope
-This document describes the high level design details on how the SONiC PDE is constructed as well as details on the PDE test suite. The PDE is available to ODMs and others looking to add new platform support, and it optimizes the development and qualification process. It offers a pre-canned, minimal code package to which the ODM can add their necessary platform driver files and static configuration files (required by SONiC to properly initialize SAI and the switching silicon). Furthermore, the PDE will provide a test suite where platform developers can quickly test their drivers and configuration files to resolve issues more easily without relying on the full SONiC application and infrastructure to be in place.
+This document describes the high level design details on how the SONiC PDE is constructed as well as details on the PDE test suite. The PDE is available to ODMs and others looking to add new platform support, and it optimizes the development and qualification process. It offers a pre-canned, minimal code package to which the ODM can add their necessary platform driver files and static configuration files (required by SONiC to properly initialize SAI and the switching silicon). Furthermore, the PDE will provide a test suite where platform developers can quickly test their drivers and configuration files to resolve issues more easily without relying on the full SONiC application and infrastructure to be in place.  本文档描述SONiC PDE的高层设计以及PDE测试组件的细节。PDE提供给ODM以及其他需要支持新平台的人，PDE优化了开发和验证过程。PDE提供了一个预置的mini的软件包， ODM在上面可以添加他们需要的平台驱动文件和静态配置文件(被SONiC所需以正确的初始化sai和switch芯片)。甚至， PDE还将提供一个测试套件， 平台开发人员可以快速的测试他们的驱动和配置文件来，因为不依赖完整的sonic应用和基础设施， 可以更容易地解决问题
 
 
 # Definition/Abbreviation
