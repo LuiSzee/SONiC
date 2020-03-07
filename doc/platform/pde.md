@@ -61,25 +61,25 @@ The requirements for the SONiC PDE are:
 10. All PDE makefiles and associated supporting files reside in the base SONiC repository as part of the "sonic-buildimage" repository and will not interfere or execute as part of the normal SONiC build process. 所有PDE makefiles和相关的支持文件都放在sonic基础分支里，在构建sonic标准版本的时候将不会执行
 11. The PDE supports the existing SONiC porting guide for adding new platform support.  Please refer to [link](https://github.com/Azure/SONiC/wiki/Porting-Guide) for more information.  pde支持已有的sonic porting guide
 
-As the PDE New platform changes added in the PDE are seamlessly integrated into the SONiC base repository.
+As the PDE New platform changes added in the PDE are seamlessly integrated into the SONiC base repository. 在pde里的改动将无缝集成到sonic base仓库
 
 ## 1.2 SONiC PDE Test Suite Requirements
 
-1.  Test and verify that the ODM provided configuration files (config.bcm, port_config.ini, sai.profile) initialize the ports through SAI accordingly.
-2.  Test and verify that all ports (including expandable or flex ports) will link up and pass L2 traffic. 
-3.  Test and verify all front panel port LEDS work according to hardware specification / customer requirements.
-4.  Test and verify all system LEDS (power, attention, locate, other) work according to hardware specification / customer requirements.
-5.  Test and verify platform specific pre-emphasis settings are programmed properly in internal / external PHYs according to the media type, cable length, etc according to the hardware specification.
-6.  Test and verify that power mode for QSFP transceivers can be configured properly for high or lower power operation. 
-7.  Test and verify that Forward Error Correction (FEC) is properly enabled based on inserted transceiver / DAC.
-8.  Test and verify that the platform drivers load without error both in switch OS reboot conditions and full AC power cycles. 
-9.  Test and verify that system EEPROM contents can be read without error.
-10. Test and verify that transceiver EEPROM contents for all ports can be read without error.
-11. Test and verify that warmboot, when supported by the underlying switching silicon, works without error on the platform.
-12. Test and verify SONiC first boot behavior specifically vs secondary boot process.  Specifically ensure that all platform drivers, configuration files, and other packages are installed without error.
-13. Test and verify that ODM and customer supported optical modules as well as DACs can operate properly within SONiC.
-14. Test and verify that platform drivers can be loaded and unloaded without requiring a reboot.
-15. All PDE tests will run at the platform layer plugin / sysfs layer.  These tests are targeted to ensure the ODM added plugin scripts and drivers interact properly and will work when interfacing to the higher level SONiC application.
+1.  Test and verify that the ODM provided configuration files (config.bcm, port_config.ini, sai.profile) initialize the ports through SAI accordingly. 能够测试和验证ODM提供的配置文件， 按sai初始化端口
+2.  Test and verify that all ports (including expandable or flex ports) will link up and pass L2 traffic.  能够测试和验证所有端口的link up和l2通包
+3.  Test and verify all front panel port LEDS work according to hardware specification / customer requirements. 能够测试和验证前面板端口灯
+4.  Test and verify all system LEDS (power, attention, locate, other) work according to hardware specification / customer requirements. 能够测试和验证系统灯
+5.  Test and verify platform specific pre-emphasis settings are programmed properly in internal / external PHYs according to the media type, cable length, etc according to the hardware specification. 能够测试和验证平台特定的预设置能正确的处理内部/外部PHY
+6.  Test and verify that power mode for QSFP transceivers can be configured properly for high or lower power operation.  能够测试和验证QSFP的高低功率配置
+7.  Test and verify that Forward Error Correction (FEC) is properly enabled based on inserted transceiver / DAC. 能够测试和验证FEC被正确的使能
+8.  Test and verify that the platform drivers load without error both in switch OS reboot conditions and full AC power cycles. 能够测试和验证系统reboot和断电重启， 平台驱动无异常
+9.  Test and verify that system EEPROM contents can be read without error. 能够测试和验证系统eeprom
+10. Test and verify that transceiver EEPROM contents for all ports can be read without error. 能够测试和验证光模块eeprom
+11. Test and verify that warmboot, when supported by the underlying switching silicon, works without error on the platform. 能够测试warmboot(如果交换芯片支持)
+12. Test and verify SONiC first boot behavior specifically vs secondary boot process.  Specifically ensure that all platform drivers, configuration files, and other packages are installed without error. 能够测试首次启动和第二次启动的行为
+13. Test and verify that ODM and customer supported optical modules as well as DACs can operate properly within SONiC. 能够测试和验证ODM和客户提供的可选模块和DAC能工作正常
+14. Test and verify that platform drivers can be loaded and unloaded without requiring a reboot. 能够测试和平台驱动能够加载和卸载而不需要重启
+15. All PDE tests will run at the platform layer plugin / sysfs layer.  These tests are targeted to ensure the ODM added plugin scripts and drivers interact properly and will work when interfacing to the higher level SONiC application. 所有pde测试都将在平台插件和sysfs层运行， 测试目的在于确保ODM添加的插件脚本和驱动能和上层应用正常交互
 
 
 ### 1.1.2 Configuration and Management Requirements
