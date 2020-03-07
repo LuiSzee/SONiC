@@ -89,22 +89,25 @@ None
 None
 
 ### 1.1.4 Warm Boot Requirements
-Warmboot is an important feature in SONiC and a requirement for many datacenter customers. All platforms and their platform drivers are tested as part of the PDE test suite to ensure they do not break the warmboot feature.  The PDE test suite checks to ensure that traffic is not lost during a warm boot.
+Warmboot is an important feature in SONiC and a requirement for many datacenter customers. All platforms and their platform drivers are tested as part of the PDE test suite to ensure they do not break the warmboot feature.  The PDE test suite checks to ensure that traffic is not lost during a warm boot. warmboot是sonic的一个重要feature， 并且被很多数据中心客户需求， 所有平台和他们的平台驱动都将在PDE测试套件里测试以确保他们不会破坏warmboot功能。PDE测试套件测试在warmboot的过程中不会断流。
+
 
 ## 1.2 Design Overview
 ### 1.2.1 Basic Approach
 The PDE source code base is generated from a successfully compiled SONiC build and will contain all the pre-built binaries, scripts, and support infrastructure needed to create a lightweight development infrastructure for platform development.  The PDE will be provided to ODMs and new customers looking to add platform support, where they can add their necessary platform driver files and static configuration files required by SONiC to properly initialize SAI and the switching silicon.  Furthermore, the PDE will provide a test suite where platform developers can quickly test their drivers and configuration files to resolve issues more easily without relying on the full SONiC application and infrastructure to be in place.
+PDE源码从成功编译的SONiC代码中生成， 包含预编译的bin文件、脚本、和平台开发者需要的轻量级开发基础设施。提供开发环境和测试套件
 
 
 ### 1.2.2 Container
 The PDE build creates a new "docker-pde" container which contains all necessary scripts, binaries, and static configuration data needed to support the PDE and the PDE test suite. Platform drivers and device configuration files remain in their existing locations within the SONiC build and runtime filesystem.
+PDE构建系统会创建一个新的docker-pde容器，其中，平台驱动和设备配置文件的位置和标准sonic的构建系统和运行时文件系统一致。
 
 # 2 Functionality
 ## 2.1 Target Deployment Use Cases
 
-The PDE does not target any type of feature deployment within SONiC. The primary use case is to enable an ODM or customer to quickly add new platform support and run a test suite to ensure that it is compatible with the full SONiC application.
+The PDE does not target any type of feature deployment within SONiC. The primary use case is to enable an ODM or customer to quickly add new platform support and run a test suite to ensure that it is compatible with the full SONiC application. 主要目的是让开发者能快速添加新的平台支持和运行测试套件， 来保证和完整sonic应用的兼容
 
-As seen in the diagram below, the PDE consists of a subset of the full SONiC build.  As the SONiC control plane is not needed for platform validation, it is replaced with a PDE test harness which focuses on testing and validating the platform as well as basic functionality of the switching silicon. The PDE is intended to validate and qualify the hardware platform such that it is seamlessly integrated into SONiC where the full function application can be used on the platform.
+As seen in the diagram below, the PDE consists of a subset of the full SONiC build.  As the SONiC control plane is not needed for platform validation, it is replaced with a PDE test harness which focuses on testing and validating the platform as well as basic functionality of the switching silicon. The PDE is intended to validate and qualify the hardware platform such that it is seamlessly integrated into SONiC where the full function application can be used on the platform. PDE没有sonic控制层，转而在sonic平台驱动接口上有平台配置数据和平台测试套件
 
 ![PDE](../../images/platform/sonicpdeoverview.png)
 
@@ -112,11 +115,14 @@ As seen in the diagram below, the PDE consists of a subset of the full SONiC bui
 ## 2.2 Functional Description
 
 The SONiC build process has build times that exceed an hour for a full build.  Furthermore, the build system itself has to have at least 50GB of disk storage and multiple CPU cores available for maximum performance.  From an ODM perspective, adding platform driver support, static configuration necessary for SONiC and SAI, and platform plugins is not a complicated process.  The PDE utilizes the pre-compiled binaries (kernel, necessary file system, etc) that were generated in a full SONiC build, and then only compiles and packages the new platform drivers that an ODM adds. This speeds up the build time tremendously and allow for quick turnaround for platform development.
+编译比完整编译要快，对编译服务器的性能要求低，好处多多
 
 Furthermore, platform developer / enablers do not need to be concerned with a majority of the SONiC application and features. The PDE creates and packages a set of automated and manual tests that ensure the platform drivers are stable and work as required for full SONiC operation, and the switch configuration is correct and allows full traffic flow across the supported port configurations.
+平台开发不用关心上层应用和feature
 
 ### 2.2.3 SAI Overview
 The PDE incorporates the necessary SAI / SDK version for the ODM to bring up the ASIC on the target platform.  It is assumed that the base SAI support for the switching silicon has already been tested and verified.
+需要sai/sdk， 要确保交换芯片的sai已经被测试和验证过
 
 # 3 Design
 ## 3.1 Overview
